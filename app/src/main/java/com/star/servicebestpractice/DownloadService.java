@@ -111,7 +111,9 @@ public class DownloadService extends Service {
 
             if (mDownloadTask != null) {
                 mDownloadTask.cancelDownload();
-            } else if (mDownloadUrl != null) {
+            }
+
+            if (mDownloadUrl != null) {
                 String fileName = mDownloadUrl.substring(mDownloadUrl.lastIndexOf("/"));
                 String directory = Environment.getExternalStoragePublicDirectory(
                         Environment.DIRECTORY_DOWNLOADS).getPath();
@@ -150,7 +152,7 @@ public class DownloadService extends Service {
                 .setContentIntent(pendingIntent)
                 .setContentTitle(title);
 
-        if (progress > 0) {
+        if (progress >= 0) {
             builder.setContentText(progress + "%");
             builder.setProgress(100, progress, false);
         }
